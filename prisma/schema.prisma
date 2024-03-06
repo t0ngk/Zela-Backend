@@ -1,0 +1,55 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id       Int    @id @default(autoincrement())
+  username String
+  password String
+}
+
+model Camp {
+  id      Int      @id @default(autoincrement())
+  name    String
+  color   String
+  campers Camper[]
+}
+
+model Camper {
+  id               Int           @id @default(autoincrement())
+  name             String
+  zelaCode         String
+  ProfileImage     ProfileImage?
+  sentMessages     Message[]     @relation("sender")
+  receivedMessages Message[]     @relation("receiver")
+  Camp             Camp?         @relation(fields: [campId], references: [id])
+  campId           Int?
+}
+
+model ProfileImage {
+  id       Int     @id @default(autoincrement())
+  url      String?
+  camper   Camper  @relation(fields: [camperId], references: [id])
+  camperId Int     @unique
+}
+
+model Message {
+  id         Int      @id @default(autoincrement())
+  content    String
+  sender     Camper   @relation(name: "sender", fields: [senderId], references: [id])
+  senderId   Int
+  receiver   Camper   @relation(name: "receiver", fields: [receiverId], references: [id])
+  receiverId Int
+  createdAt  DateTime @default(now())
+}
