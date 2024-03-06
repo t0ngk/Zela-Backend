@@ -29,7 +29,7 @@ model Camp {
 model Camper {
   id               Int           @id @default(autoincrement())
   name             String
-  zelaCode         String
+  zelaCode         String        @unique
   ProfileImage     ProfileImage?
   sentMessages     Message[]     @relation("sender")
   receivedMessages Message[]     @relation("receiver")
