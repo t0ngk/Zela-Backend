@@ -48,6 +48,11 @@ router.get("/", async (_: Request, res: Response) => {
       name: true,
       Camp: true,
       zelaCode: true,
+      ProfileImage: {
+        select: {
+          url: true,
+        }
+      },
     },
   });
   res.send(campers);
