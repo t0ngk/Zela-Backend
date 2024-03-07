@@ -1,4 +1,4 @@
-import { Router, Response } from "express";
+import { Router, Response, Request } from "express";
 import upload from "../../libs/upload";
 import isCamperLogin from "../../libs/middlewares/isCamperLogin";
 import prisma from "../../libs/prisma";
@@ -40,5 +40,17 @@ router.post(
     });
   }
 );
+
+router.get("/", async (_: Request, res: Response) => {
+  const campers = await prisma.camper.findMany({
+    select: {
+      id: true,
+      name: true,
+      Camp: true,
+      zelaCode: true,
+    },
+  });
+  res.send(campers);
+});
 
 export default router;
