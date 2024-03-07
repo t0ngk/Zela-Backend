@@ -87,7 +87,9 @@ router.post(
           })
         );
       }
-      return res.status(500).send("Internal Server Error");
+      return res.status(500).send({
+        message: "Internal Server Error",
+      });
     }
   }
 );

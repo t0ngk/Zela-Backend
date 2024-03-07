@@ -10,7 +10,9 @@ const isAdminLogin = async (
 ) => {
   const token = req.headers.authorization?.split(" ")[1];
   if (!token) {
-    return res.status(401).send("Unauthorized");
+    return res.status(401).send({
+      message: "Unauthorized"
+    });
   }
 
   try {
@@ -25,12 +27,16 @@ const isAdminLogin = async (
       },
     });
     if (!admin) {
-      return res.status(404).send("Admin not found");
+      return res.status(404).send({
+        message: "Admin not found"
+      });
     }
     req.user = admin;
     next();
   } catch (error) {
-    return res.status(401).send("Unauthorized");
+    return res.status(401).send({
+      message: "Unauthorized"
+    });
   }
 };
 

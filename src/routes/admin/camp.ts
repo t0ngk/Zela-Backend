@@ -36,7 +36,9 @@ router.post(
           })
         );
       }
-      return res.status(500).send("Internal Server Error");
+      return res.status(500).send({
+        message: "Internal Server Error",
+      });
     }
   }
 );
@@ -69,7 +71,9 @@ router.put(
           })
         );
       }
-      return res.status(500).send("Internal Server Error");
+      return res.status(500).send({
+        message: "Internal Server Error",
+      });
     }
   }
 );
@@ -85,7 +89,9 @@ router.delete(
         },
       });
       if (!camp) {
-        return res.status(404).send("Camp not found");
+        return res.status(404).send({
+          message: "Camp not found",
+        });
       }
       await prisma.camp.delete({
         where: {
@@ -95,7 +101,9 @@ router.delete(
       return res.send("Camp deleted");
     } catch (error) {
       console.error(error);
-      return res.status(500).send("Internal Server Error");
+      return res.status(500).send({
+        message: "Internal Server Error",
+      });
     }
   }
 );

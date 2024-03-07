@@ -25,7 +25,9 @@ router.post(
           },
         });
         if (!camp) {
-          return res.status(404).send("Camp not found");
+          return res.status(404).send({
+            message: "Camp not found",
+          });
         }
       }
       const isCamperExist = await prisma.camper.findUnique({
@@ -34,7 +36,9 @@ router.post(
         },
       });
       if (isCamperExist) {
-        return res.status(400).send("Zela code already exist");
+        return res.status(400).send({
+          message: "Camper already exist",
+        });
       }
       const camper = await prisma.camper.create({
         data: {
@@ -56,7 +60,9 @@ router.post(
           })
         );
       }
-      return res.status(500).send("Internal Server Error");
+      return res.status(500).send({
+        message: "Internal Server Error",
+      });
     }
   }
 );
@@ -74,7 +80,9 @@ router.put(
         },
       });
       if (!camper) {
-        return res.status(404).send("Camper not found");
+        return res.status(404).send({
+          message: "Camper not found",
+        });
       }
       if (data.campId !== null) {
         const camp = await prisma.camp.findUnique({
@@ -83,7 +91,9 @@ router.put(
           },
         });
         if (!camp) {
-          return res.status(404).send("Camp not found");
+          return res.status(404).send({
+            message: "Camp not found",
+          });
         }
       }
       const updatedCamper = await prisma.camper.update({
@@ -109,7 +119,9 @@ router.put(
           })
         );
       }
-      return res.status(500).send("Internal Server Error");
+      return res.status(500).send({
+        message: "Internal Server Error",
+      });
     }
   }
 );
@@ -126,7 +138,9 @@ router.delete(
         },
       });
       if (!camper) {
-        return res.status(404).send("Camper not found");
+        return res.status(404).send({
+          message: "Camper not found",
+        });
       }
       await prisma.camper.delete({
         where: {
@@ -135,7 +149,9 @@ router.delete(
       });
       return res.send("Camper deleted");
     } catch (error) {
-      return res.status(500).send("Internal Server Error");
+      return res.status(500).send({
+        message: "Internal Server Error",
+      });
     }
   }
 );

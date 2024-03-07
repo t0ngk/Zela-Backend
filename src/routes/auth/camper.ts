@@ -45,7 +45,9 @@ router.post("/code", async (req: Request, res: Response) => {
         })
       );
     }
-    return res.status(500).send("Internal Server Error");
+    return res.status(500).send({
+      message: "Internal Server Error",
+    });
   }
 });
 
@@ -54,7 +56,9 @@ router.post("/code", async (req: Request, res: Response) => {
 router.get("/me", async (req: Request, res: Response) => {
   const token = req.headers.authorization?.split(" ")[1];
   if (!token) {
-    return res.status(401).send("Unauthorized");
+    return res.status(401).send({
+      message: "Unauthorized",
+    });
   }
   try {
     const payload = jwt.verify(token, process.env.SERCET_KEY!);
@@ -72,9 +76,13 @@ router.get("/me", async (req: Request, res: Response) => {
     if (camper) {
       return res.status(200).send(camper);
     }
-    return res.status(404).send("Camper not found");
+    return res.status(404).send({
+      message: "Camper not found",
+    });
   } catch (error) {
-    return res.status(401).send("Unauthorized");
+    return res.status(401).send({
+      message: "Unauthorized",
+    });
   }
 });
 

@@ -12,7 +12,9 @@ router.post(
   upload.single("profile"),
   async (req: CamperLoginRequest, res: Response) => {
     if (req.file === undefined) {
-      return res.status(400).send("File is required");
+      return res.status(400).send({
+        message: "File is required",
+      });
     }
     const path = req.file.path;
     const camper = req.user;

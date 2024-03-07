@@ -41,7 +41,9 @@ router.post("/login", async (req: Request, res: Response) => {
           password: bcrypt.hashSync(password, 10),
         },
       });
-      return res.send("Admin created");
+      return res.send({
+        message: "Admin created",
+      });
     }
     const { username, password } = adminSchema.parse(req.body);
     const user = await prisma.user.findFirst({
@@ -50,10 +52,14 @@ router.post("/login", async (req: Request, res: Response) => {
       },
     });
     if (!user) {
-      return res.status(404).send("User not found");
+      return res.status(404).send({
+        message: "Admin not found",
+      });
     }
     if (!bcrypt.compareSync(password, user.password)) {
-      return res.status(401).send("Invalid password");
+      return res.status(401).send({
+        message: "Unauthorized",
+      });
     }
     const token = jwt.sign({ id: user.id }, process.env.SERCET_KEY as string);
     return res.send({ token });
@@ -69,7 +75,9 @@ router.post("/login", async (req: Request, res: Response) => {
         })
       );
     }
-    return res.status(500).send("Internal Server Error");
+    return res.status(500).send({
+      message: "Internal Server Error",
+    });
   }
 });
 

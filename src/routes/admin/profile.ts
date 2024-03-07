@@ -12,7 +12,9 @@ router.post(
   upload.single("profile"),
   async (req: CamperLoginRequest, res: Response) => {
     if (req.file === undefined) {
-      return res.status(400).send("File is required");
+      return res.status(400).send({
+        message: "File is required",
+      });
     }
     const path = req.file.path;
     const camper = await prisma.camper.findUnique({
@@ -21,7 +23,9 @@ router.post(
       },
     });
     if (!camper) {
-      return res.status(404).send("Camper not found");
+      return res.status(404).send({
+        message: "Camper not found",
+      });
     }
     const profileImage = await prisma.profileImage.create({
       data: {

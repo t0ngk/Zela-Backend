@@ -57,7 +57,9 @@ router.get("/campers/", async (req: Request, res: Response) => {
     }
   } catch (error) {
     console.log(error);
-    return res.status(500).send("Internal Server Error");
+    return res.status(500).send({
+      message: "Internal Server Error",
+    });
   }
 });
 
