@@ -2,3 +2,5 @@ node_modules/
 **/.DS_Store
 dist/
 .env
+static/uploads/profiles/*
+!static/uploads/profiles/.gitkeep
