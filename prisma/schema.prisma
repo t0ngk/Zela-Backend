@@ -40,8 +40,8 @@ model Camper {
 model ProfileImage {
   id       Int     @id @default(autoincrement())
   url      String?
-  camper   Camper  @relation(fields: [camperId], references: [id])
-  camperId Int     @unique
+  camper   Camper? @relation(fields: [camperId], references: [id])
+  camperId Int?    @unique
 }
 
 model Message {
