@@ -3,6 +3,7 @@ import cors from "cors";
 import authRouter from "./src/routes/auth";
 import messageRouter from "./src/routes/message";
 import searchRouter from "./src/routes/search";
+import adminRouter from "./src/routes/admin";
 
 const app = express();
 const port = 3000;
@@ -13,6 +14,7 @@ app.use(cors());
 app.use("/auth", authRouter);
 app.use("/message", messageRouter);
 app.use("/search", searchRouter);
+app.use("/admin", adminRouter);
 
 app.get("/", (_, res) => {
   res.send("Zela API Online!");
