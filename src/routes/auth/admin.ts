@@ -3,6 +3,8 @@ import { z } from "zod";
 import prisma from "../../libs/prisma";
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
+import isAdminLogin from "../../libs/middlewares/isAdminLogin";
+import { AdminLoginRequest } from "../../libs/types/AdminLoginRequest";
 
 const router = Router();
 
@@ -19,6 +21,11 @@ router.get("/", async (_: Request, res: Response) => {
     return res.send(true);
   }
   return res.send(false);
+});
+
+router.get("/me", isAdminLogin , async (req: AdminLoginRequest, res: Response) => {
+  const admin = req.user;
+  return res.send(admin);
 });
 
 // POST /auth/admin/login
