@@ -4,3 +4,4 @@ dist/
 .env
 static/uploads/profiles/*
 !static/uploads/profiles/.gitkeep
+prisma/dbml/*
