@@ -6,7 +6,7 @@ import { AdminLoginRequest } from "../../libs/types/AdminLoginRequest";
 const router = Router();
 
 router.get(
-  "/dashboard",
+  "/",
   isAdminLogin,
   async (_: AdminLoginRequest, res: Response) => {
     const totalCamps = await prisma.camp.count({
