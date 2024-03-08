@@ -22,6 +22,11 @@ router.get(
             name: true,
             zelaCode: true,
             Camp: true,
+            ProfileImage: {
+              select: {
+                url: true,
+              },
+            },
           },
         },
       },
