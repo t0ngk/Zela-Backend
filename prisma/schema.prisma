@@ -38,7 +38,7 @@ model Camper {
   ProfileImage     ProfileImage?
   sentMessages     Message[]     @relation("sender")
   receivedMessages Message[]     @relation("receiver")
-  Camp             Camp?         @relation(fields: [campId], references: [id])
+  Camp             Camp?         @relation(fields: [campId], references: [id], onDelete: SetNull)
   campId           Int?
 }
 
