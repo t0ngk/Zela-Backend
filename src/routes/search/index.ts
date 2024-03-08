@@ -18,7 +18,7 @@ router.get("/campers/", async (req: Request, res: Response) => {
   try {
     const name = req.query.name as string;
     const camp = req.query.camp as string;
-    if (!name) {
+    if (!name && !camp) {
       const campers = await prisma.camper.findMany(
         {select: {
           id: true,
