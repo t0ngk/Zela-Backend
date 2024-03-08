@@ -29,6 +29,18 @@ router.get(
             },
           },
         },
+        sender : {
+          select: {
+            name: true,
+            zelaCode: true,
+            Camp: true,
+            ProfileImage: {
+              select: {
+                url: true,
+              },
+            },
+          },
+        }
       },
     });
     res.send(messages);
