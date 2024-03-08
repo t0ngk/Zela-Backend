@@ -41,7 +41,7 @@ router.post(
     try {
       const data = messageSchema.parse(req.body);
       const receiverId = req.params.id;
-      const senderId = req.user.zelaCode;
+      const senderId = req.user.id;
       if (receiverId === senderId) {
         return res.status(400).send({
           message: "You can't send message to yourself",
@@ -49,7 +49,7 @@ router.post(
       }
       const receiver = await prisma.camper.findUnique({
         where: {
-          zelaCode: receiverId,
+          id: parseInt(receiverId),
         },
       });
       if (!receiver) {
@@ -62,12 +62,12 @@ router.post(
           content: data.message,
           sender: {
             connect: {
-              zelaCode: senderId,
+              id: senderId,
             },
           },
           receiver: {
             connect: {
-              zelaCode: receiverId,
+              id: parseInt(receiverId),
             },
           },
         },

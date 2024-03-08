@@ -47,7 +47,6 @@ router.get("/", async (_: Request, res: Response) => {
       id: true,
       name: true,
       Camp: true,
-      zelaCode: true,
       ProfileImage: {
         select: {
           url: true,

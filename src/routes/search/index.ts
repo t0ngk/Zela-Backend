@@ -32,7 +32,6 @@ router.get("/campers/", async (req: Request, res: Response) => {
           id: true,
           name: true,
           Camp: true,
-          zelaCode: true,
         },
       });
       return res.send(campers);
@@ -50,7 +49,6 @@ router.get("/campers/", async (req: Request, res: Response) => {
           id: true,
           name: true,
           Camp: true,
-          zelaCode: true,
         },
       });
       return res.send(campers);

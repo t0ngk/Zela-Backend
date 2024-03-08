@@ -68,7 +68,6 @@ router.get("/me", async (req: Request, res: Response) => {
       },
       select: {
         name: true,
-        zelaCode: true,
         ProfileImage: true,
         Camp: true,
       },
