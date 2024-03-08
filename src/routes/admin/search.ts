@@ -1,20 +1,11 @@
 import { Router, Request, Response } from "express";
 import prisma from "../../libs/prisma";
+import isAdminLogin from "../../libs/middlewares/isAdminLogin";
+import { AdminLoginRequest } from "../../libs/types/AdminLoginRequest";
 
 const router = Router();
 
-router.get("/camps", async (_, res: Response) => {
-  const camps = await prisma.camp.findMany({
-    select: {
-      id: true,
-      name: true,
-      color: true,
-    },
-  });
-  res.send(camps);
-});
-
-router.get("/campers/", async (req: Request, res: Response) => {
+router.get("/campers/", isAdminLogin , async (req: AdminLoginRequest, res: Response) => {
   try {
     const name = req.query.name as string;
     const camp = req.query.camp as string;
@@ -24,6 +15,7 @@ router.get("/campers/", async (req: Request, res: Response) => {
           id: true,
           name: true,
           Camp: true,
+          zelaCode: true,
           ProfileImage: {
             select: {
               url: true,
@@ -44,6 +36,7 @@ router.get("/campers/", async (req: Request, res: Response) => {
           id: true,
           name: true,
           Camp: true,
+          zelaCode: true,
           ProfileImage: {
             select: {
               url: true,
@@ -66,6 +59,7 @@ router.get("/campers/", async (req: Request, res: Response) => {
           id: true,
           name: true,
           Camp: true,
+          zelaCode: true,
           ProfileImage: {
             select: {
               url: true,
