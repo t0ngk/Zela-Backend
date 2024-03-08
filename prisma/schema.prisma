@@ -47,9 +47,9 @@ model ProfileImage {
 model Message {
   id         Int      @id @default(autoincrement())
   content    String
-  sender     Camper   @relation(name: "sender", fields: [senderId], references: [id])
+  sender     Camper   @relation(name: "sender", fields: [senderId], references: [id], onDelete: Cascade)
   senderId   Int
-  receiver   Camper   @relation(name: "receiver", fields: [receiverId], references: [id])
+  receiver   Camper   @relation(name: "receiver", fields: [receiverId], references: [id], onDelete: Cascade)
   receiverId Int
   createdAt  DateTime @default(now())
 }
