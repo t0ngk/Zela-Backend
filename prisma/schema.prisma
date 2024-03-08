@@ -45,7 +45,7 @@ model Camper {
 model ProfileImage {
   id       Int     @id @default(autoincrement())
   url      String?
-  camper   Camper? @relation(fields: [camperId], references: [id])
+  camper   Camper? @relation(fields: [camperId], references: [id], onDelete: SetNull)
   camperId Int?    @unique
 }
 
