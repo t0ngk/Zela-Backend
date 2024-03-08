@@ -12,12 +12,12 @@ router.get(
     const camper = req.user;
     const messages = await prisma.message.findMany({
       where: {
-        senderId: camper.id,
+        receiverId: camper.id,
       },
       select: {
         content: true,
         createdAt: true,
-        sender: {
+        receiver: {
           select: {
             name: true,
             zelaCode: true,
